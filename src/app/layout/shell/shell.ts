@@ -12,5 +12,6 @@ export class Shell {
     { ruta: '/Empleados', etiqueta: 'Empleados' },
     { ruta: '/Animales', etiqueta: 'Animales' },
     { ruta: '/Proveedores', etiqueta: 'Proveedores' },
+    { ruta: '/Productos', etiqueta: 'Productos' },
   ];
 }

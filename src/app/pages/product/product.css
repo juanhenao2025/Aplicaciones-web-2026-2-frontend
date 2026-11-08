@@ -1,44 +1,43 @@
 :host {
-  --morado: #7c3aed;
-  --morado-oscuro: #5b21b6;
-  --morado-claro: #a78bfa;
-  --azul: #2563eb;
-  --rojo: #ef4444;
-  --rojo-oscuro: #b91c1c;
-  --texto: #1e1b4b;
-  --suave: #5b5873;
+  --m: #7c3aed;
+  --mo: #5b21b6;
+  --mc: #a78bfa;
+  --a: #2563eb;
+  --r: #ef4444;
+  --ro: #b91c1c;
+  --t: #1e1b4b;
+  --s: #5b5873;
+  --g: linear-gradient(135deg, var(--m), var(--a));
+  --f: 0 0 0 4px rgba(124, 58, 237, 0.18);
+  --i: 'Inter', system-ui, sans-serif;
+  --p: 'Poppins', system-ui, sans-serif;
   display: block;
   font-size: 1.0625rem; /* letra base más grande */
 }
 
 .hero, .alerta, .card, .subtitulo, .tabla-wrap {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--i);
 }
-.hero h2, .card h3, .subtitulo, label, .etiqueta,
-.btn-primario, .btn-secundario, .tabla th {
-  font-family: 'Poppins', system-ui, sans-serif;
-}
-
 /* ============ Animaciones ============ */
 @keyframes subir {
   from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: none; }
 }
 @keyframes fondo {
-  0%   { background-position: 0% 50%; }
+  0%   { background-position: 0 50%; }
   50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  100% { background-position: 0 50%; }
 }
 @keyframes temblor {
-  0%, 100% { transform: translateX(0); }
-  20%      { transform: translateX(-6px); }
-  40%      { transform: translateX(6px); }
-  60%      { transform: translateX(-4px); }
-  80%      { transform: translateX(4px); }
+  0%, 100% { transform: none; }
+  20%      { transform: translate(-6px); }
+  40%      { transform: translate(6px); }
+  60%      { transform: translate(-4px); }
+  80%      { transform: translate(4px); }
 }
 @keyframes latido {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.35); }
-  50%      { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  0%, 100% { box-shadow: 0 0 rgba(239, 68, 68, 0.35); }
+  50%      { box-shadow: 0 0 0 8px transparent; }
 }
 
 /* ============ Encabezado ============ */
@@ -63,15 +62,15 @@
 }
 .hero::before { width: 180px; height: 180px; top: -70px; right: -40px; }
 .hero::after  { width: 110px; height: 110px; bottom: -50px; right: 150px; }
-.hero h2 {
+.hero h2, .hero p {
   position: relative;
+}
+.hero h2 {
   margin: 0 0 8px;
-  font-size: 2.3rem;
-  font-weight: 700;
+  font: 700 2.3rem var(--p);
   letter-spacing: -0.5px;
 }
 .hero p {
-  position: relative;
   margin: 0;
   opacity: 0.95;
   font-size: 1.15rem;
@@ -81,8 +80,8 @@
 .alerta {
   background: linear-gradient(90deg, #fef2f2, #fff);
   border: 1px solid #fecaca;
-  border-left: 6px solid var(--rojo);
-  color: var(--rojo-oscuro);
+  border-left: 6px solid var(--r);
+  color: var(--ro);
   padding: 16px 20px;
   border-radius: 12px;
   margin-bottom: 18px;
@@ -92,13 +91,15 @@
 }
 
 /* ============ Tarjeta del formulario ============ */
-.card {
+.card, .tabla-wrap {
   background: #fff;
   border: 1px solid #ede9fe;
   border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.10);
+}
+.card {
   padding: 28px;
   margin-bottom: 32px;
-  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.10);
   animation: subir 0.5s ease 0.1s both;
 }
 .card h3 {
@@ -107,9 +108,8 @@
   gap: 10px;
   margin: 0 0 22px;
   padding-bottom: 14px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--morado-oscuro);
+  font: 600 1.4rem var(--p);
+  color: var(--mo);
   border-bottom: 2px solid #f3e8ff;
 }
 .card h3::before {
@@ -117,7 +117,7 @@
   width: 6px;
   height: 26px;
   border-radius: 4px;
-  background: linear-gradient(180deg, var(--morado), var(--azul));
+  background: linear-gradient(180deg, var(--m), var(--a));
 }
 
 .form {
@@ -130,53 +130,56 @@
 
 /* ============ Etiquetas ============ */
 label, .etiqueta {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font: 600 0.95rem var(--p);
   letter-spacing: 0.3px;
   text-transform: uppercase;
   color: #4c1d95;
   transition: color 0.2s;
 }
-.campo:focus-within > label { color: var(--morado); }
+.campo:focus-within > label { color: var(--m); }
 .req {
-  color: var(--rojo);
+  color: var(--r);
   font-size: 1.1rem;
   margin-left: 2px;
 }
 
 /* ============ Campos ============ */
-.campo input:not([type='checkbox']) {
-  font-family: 'Inter', system-ui, sans-serif;
-  padding: 14px 16px;
+input:not([type=checkbox]) {
   border: 2px solid #e9e5f5;
   border-radius: 12px;
   background: #faf9ff;
-  color: var(--texto);
-  font-size: 1.1rem;
-  font-weight: 500;
+  font: 1.1rem var(--i);
   outline: none;
+}
+.campo input:not([type=checkbox]) {
+  padding: 14px 16px;
+  color: var(--t);
+  font-weight: 500;
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, transform 0.2s;
 }
 .campo input::placeholder { color: #9792b3; font-weight: 400; }
 
-.campo input:not([type='checkbox']):hover {
-  border-color: var(--morado-claro);
+.campo input:not([type=checkbox]):is(:hover, :focus) {
   background: #fff;
 }
-.campo input:not([type='checkbox']):focus {
-  border-color: var(--morado);
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18),
+.campo input:not([type=checkbox]):hover {
+  border-color: var(--mc);
+}
+.campo input:not([type=checkbox]):focus {
+  box-shadow: var(--f),
               0 8px 18px rgba(124, 58, 237, 0.18);
   transform: translateY(-2px);
 }
+.campo input:not([type=checkbox]):focus,
+.buscador input:focus {
+  border-color: var(--m);
+}
 .campo input.invalido {
-  border-color: var(--rojo);
+  border-color: var(--r);
   background: #fff5f5;
   animation: temblor 0.4s ease;
 }
 .campo input.invalido:focus {
-  border-color: var(--rojo);
   box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2),
               0 8px 18px rgba(239, 68, 68, 0.18);
 }
@@ -188,12 +191,12 @@ label, .etiqueta {
   gap: 8px;
   min-height: 22px;
 }
-.ayuda { color: var(--suave); font-size: 0.9rem; }
+.ayuda { color: var(--s); font-size: 0.9rem; }
 .msg-error {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--rojo-oscuro);
+  color: var(--ro);
   font-size: 0.95rem;
   font-weight: 600;
   animation: subir 0.25s ease both;
@@ -205,7 +208,7 @@ label, .etiqueta {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--rojo);
+  background: var(--r);
   color: #fff;
   font-size: 0.8rem;
   font-weight: 700;
@@ -224,12 +227,10 @@ label, .etiqueta {
   gap: 14px;
   margin-top: 6px;
   cursor: pointer;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font: 500 1.1rem var(--i);
   text-transform: none;
   letter-spacing: 0;
-  color: var(--texto);
+  color: var(--t);
 }
 .interruptor input[type='checkbox'] {
   position: absolute;
@@ -259,7 +260,7 @@ label, .etiqueta {
 }
 .interruptor:hover .slider { box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15); }
 .interruptor input:checked + .slider {
-  background: linear-gradient(135deg, var(--morado), var(--azul));
+  background: var(--gradient);
 }
 .interruptor input:checked + .slider::after { transform: translateX(26px); }
 .interruptor input:focus-visible + .slider {
@@ -274,18 +275,19 @@ label, .etiqueta {
   gap: 12px;
   margin-top: 8px;
 }
+.btn-primario, .btn-secundario {
+  border-radius: 12px;
+  font: 600 1.1rem var(--p);
+  cursor: pointer;
+}
 .btn-primario {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--morado), var(--azul));
+  background: var(--gradient);
   color: #fff;
   border: 0;
   padding: 15px 34px;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
   letter-spacing: 0.3px;
-  cursor: pointer;
   box-shadow: 0 8px 20px rgba(124, 58, 237, 0.38);
   transition: transform 0.15s, box-shadow 0.2s;
 }
@@ -309,19 +311,17 @@ label, .etiqueta {
 
 .btn-secundario {
   background: #fff;
-  color: var(--morado-oscuro);
-  border: 2px solid var(--morado-claro);
+  color: var(--mo);
+  border: 2px solid var(--mc);
   padding: 15px 28px;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
   transition: all 0.2s;
 }
 .btn-secundario:hover {
   background: #f5f3ff;
-  border-color: var(--morado);
+  border-color: var(--m);
   box-shadow: 0 6px 16px rgba(124, 58, 237, 0.2);
+}
+.btn-secundario:hover, .btn-editar:hover, .btn-eliminar:hover {
   transform: translateY(-2px);
 }
 
@@ -331,13 +331,12 @@ label, .etiqueta {
   align-items: center;
   gap: 12px;
   margin: 0 0 14px;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--texto);
+  font: 600 1.5rem var(--p);
+  color: var(--t);
   animation: subir 0.5s ease 0.2s both;
 }
 .badge {
-  background: linear-gradient(135deg, var(--morado), var(--azul));
+  background: var(--gradient);
   color: #fff;
   font-size: 0.95rem;
   font-weight: 600;
@@ -349,36 +348,27 @@ label, .etiqueta {
 /* ============ Tabla con el mismo estilo ============ */
 .tabla-wrap {
   overflow-x: auto;
-  background: #fff;
-  border: 1px solid #ede9fe;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.10);
   animation: subir 0.5s ease 0.3s both;
 }
 .tabla {
   width: 100%;
   border-collapse: collapse;
   font-size: 1.05rem;
-  color: var(--texto);
+  color: var(--t);
 }
 .tabla th {
   padding: 18px 16px;
+  font: 600 0.92rem var(--p);
   text-align: left;
-  font-size: 0.92rem;
-  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: #fff;
   background: linear-gradient(120deg, #5b21b6, #7c3aed, #2563eb);
-  border: 0;
   white-space: nowrap;
 }
 .tabla td {
   padding: 16px;
-  border: 0;
   border-bottom: 1px solid #f1ecfb;
-  text-align: left;
-  vertical-align: middle;
 }
 .tabla tbody tr {
   transition: background 0.15s, box-shadow 0.15s;
@@ -386,16 +376,16 @@ label, .etiqueta {
 .tabla tbody tr:nth-child(even) { background: #faf8ff; }
 .tabla tbody tr:hover {
   background: #f3edff;
-  box-shadow: inset 5px 0 0 var(--morado);
+  box-shadow: inset 5px 0 0 var(--m);
 }
 .tabla tbody tr:last-child td { border-bottom: 0; }
 
-.tabla .nombre { font-weight: 600; }
-.tabla .costo { font-weight: 600; color: var(--morado-oscuro); }
+.tabla .nombre, .tabla .costo { font-weight: 600; }
+.tabla .costo { color: var(--mo); }
 .tabla .vacio {
   text-align: center;
   padding: 36px;
-  color: var(--suave);
+  color: var(--s);
   font-size: 1.1rem;
 }
 
@@ -404,7 +394,7 @@ label, .etiqueta {
   padding: 4px 10px;
   border-radius: 8px;
   background: #ede9fe;
-  color: var(--morado-oscuro);
+  color: var(--mo);
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -422,42 +412,39 @@ label, .etiqueta {
 }
 .estado.no {
   background: #fee2e2;
-  color: var(--rojo-oscuro);
+  color: var(--ro);
 }
 
 /* Botones de la tabla */
 .celda-acciones { white-space: nowrap; }
 .btn-editar, .btn-eliminar {
-  font-family: 'Poppins', system-ui, sans-serif;
+  font: 600 0.98rem var(--p);
+  cursor: pointer;
   padding: 10px 18px;
   margin-right: 8px;
   border-radius: 10px;
-  font-size: 0.98rem;
-  font-weight: 600;
-  cursor: pointer;
   transition: transform 0.15s, box-shadow 0.2s, background 0.2s, color 0.2s;
 }
 .btn-editar {
   background: #ede9fe;
-  color: var(--morado-oscuro);
+  color: var(--mo);
   border: 2px solid transparent;
 }
 .btn-editar:hover {
-  background: linear-gradient(135deg, var(--morado), var(--azul));
-  color: #fff;
-  transform: translateY(-2px);
+  background: var(--gradient);
   box-shadow: 0 8px 16px rgba(124, 58, 237, 0.35);
 }
 .btn-eliminar {
   background: #fee2e2;
-  color: var(--rojo-oscuro);
+  color: var(--ro);
   border: 2px solid transparent;
 }
 .btn-eliminar:hover {
   background: linear-gradient(135deg, #ef4444, #b91c1c);
-  color: #fff;
-  transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(239, 68, 68, 0.4);
+}
+.btn-editar:hover, .btn-eliminar:hover {
+  color: #fff;
 }
 
 .buscador {
@@ -470,15 +457,8 @@ label, .etiqueta {
   flex: 1;
   min-width: 260px;
   padding: 14px 16px;
-  border: 2px solid #e9e5f5;
-  border-radius: 12px;
-  background: #faf9ff;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 1.1rem;
-  outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .buscador input:focus {
-  border-color: var(--morado);
-  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
+  box-shadow: var(--f);
 }
