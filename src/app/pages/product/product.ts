@@ -25,9 +25,11 @@ export class ProductPage implements OnInit {
     this.service.list().subscribe({
       next: (data) => {
         this.products.set(data);
+        this.error.set('');
         console.log("Products loaded:", data);
       },
       error: (err) => {
+        this.products.set([]);
         this.error.set(this.message(err));
         console.error("Error loading products:", err);
       }
